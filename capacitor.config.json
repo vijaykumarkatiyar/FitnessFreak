@@ -1,0 +1,6 @@
+{
+  "appId": "com.yourname.myapp",
+  "appName": "My App",
+  "webDir": "build",
+  "bundledWebRuntime": false
+}
