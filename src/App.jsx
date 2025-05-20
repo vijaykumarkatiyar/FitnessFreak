@@ -123,9 +123,9 @@ const Header = ({ currentUser, toggleMobileSidebar, currentView, isDesktopSideba
         <span className="text-sm text-gray-700 dark:text-gray-300 hidden sm:block">
           Welcome, {currentUser ? currentUser.name : 'Guest'}!
         </span>
-        <button 
-            onClick={onLogout} 
-            className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-red-100 dark:hover:bg-red-700 hover:text-red-600 dark:hover:text-red-200 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800" 
+        <button
+            onClick={onLogout}
+            className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-red-100 dark:hover:bg-red-700 hover:text-red-600 dark:hover:text-red-200 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
             aria-label="Logout"
         >
           <LogOut size={22} />
@@ -171,7 +171,7 @@ const Sidebar = ({ isMobileSidebarOpen, isDesktopSidebarCollapsed, currentView, 
     >
       <div className={`flex items-center justify-center h-16 border-b border-gray-700 dark:border-gray-750 transition-all duration-300 ${showText ? 'px-4' : 'lg:px-2'}`}>
         <img src="/img/symbol.jpeg" alt="Fitness Freak Logo" className={`transition-all duration-200 ${showText ? 'mr-2' : 'lg:mx-auto'} bg-white dark:bg-gray-900`} style={{ width: showText ? 32 : 28, height: showText ? 32 : 28, borderRadius: '8px', objectFit: 'cover' }} />
-        <h1 className={`font-bold text-indigo-400 dark:text-indigo-500 transition-opacity duration-200 ${showText ? 'text-2xl opacity-100' : 'lg:opacity-0 lg:text-[0px] lg:hidden'}`}>
+        <h1 className={`font-bold text-indigo-400 dark:text-orange-500 transition-opacity duration-200 ${showText ? 'text-2xl opacity-100' : 'lg:opacity-0 lg:text-[0px] lg:hidden'}`}>
           Fitness Freak
         </h1>
       </div>
@@ -184,8 +184,8 @@ const Sidebar = ({ isMobileSidebarOpen, isDesktopSidebarCollapsed, currentView, 
               <div key="Gallery" className="space-y-1">
                 <button
                   onClick={() => setCurrentView('Gallery')}
-                  className={`w-full flex items-center py-3 rounded-lg text-left transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-1 focus:ring-offset-gray-800
-                    ${currentView === 'Gallery' || currentView === 'BrandIcon' ? 'bg-indigo-600 dark:bg-indigo-700 text-white shadow-md' : 'hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-indigo-300 dark:hover:text-indigo-400'}
+                  className={`w-full flex items-center py-3 rounded-lg text-left transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:focus:ring-orange-400 focus:ring-offset-1 focus:ring-offset-gray-800
+                    ${currentView === 'Gallery' || currentView === 'BrandIcon' ? 'bg-indigo-600 dark:bg-orange-700 text-white shadow-md' : 'hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-indigo-300 dark:hover:text-orange-400'}
                     ${showText ? 'px-4 space-x-3' : 'lg:px-0 lg:justify-center lg:py-3'}`}
                   title="Gallery"
                 >
@@ -198,8 +198,8 @@ const Sidebar = ({ isMobileSidebarOpen, isDesktopSidebarCollapsed, currentView, 
                   <div className="ml-8 space-y-1">
                     <button
                       onClick={() => setCurrentView('Gallery')}
-                      className={`w-full flex items-center py-2 rounded-lg text-left text-sm transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-1 focus:ring-offset-gray-800
-                        ${currentView === 'Gallery' ? 'bg-indigo-500 dark:bg-indigo-600 text-white' : 'hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-indigo-300 dark:hover:text-indigo-400'}
+                      className={`w-full flex items-center py-2 rounded-lg text-left text-sm transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:focus:ring-orange-400 focus:ring-offset-1 focus:ring-offset-gray-800
+                        ${currentView === 'Gallery' ? 'bg-indigo-500 dark:bg-orange-600 text-white' : 'hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-indigo-300 dark:hover:text-orange-400'}
                         px-2`}
                       title="Gallery"
                     >
@@ -207,8 +207,8 @@ const Sidebar = ({ isMobileSidebarOpen, isDesktopSidebarCollapsed, currentView, 
                     </button>
                     <button
                       onClick={() => setCurrentView('BrandIcon')}
-                      className={`w-full flex items-center py-2 rounded-lg text-left text-sm transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-1 focus:ring-offset-gray-800
-                        ${currentView === 'BrandIcon' ? 'bg-indigo-500 dark:bg-indigo-600 text-white' : 'hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-indigo-300 dark:hover:text-indigo-400'}
+                      className={`w-full flex items-center py-2 rounded-lg text-left text-sm transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:focus:ring-orange-400 focus:ring-offset-1 focus:ring-offset-gray-800
+                        ${currentView === 'BrandIcon' ? 'bg-indigo-500 dark:bg-orange-600 text-white' : 'hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-indigo-300 dark:hover:text-orange-400'}
                         px-2`}
                       title="BrandIcon"
                     >
@@ -227,8 +227,8 @@ const Sidebar = ({ isMobileSidebarOpen, isDesktopSidebarCollapsed, currentView, 
                 setCurrentView(view);
                 if (isMobileSidebarOpen) closeMobileSidebar();
               }}
-              className={`w-full flex items-center py-3 rounded-lg text-left transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-1 focus:ring-offset-gray-800
-                        ${currentView === view ? 'bg-indigo-600 dark:bg-indigo-700 text-white shadow-md' : 'hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-indigo-300 dark:hover:text-indigo-400'}
+              className={`w-full flex items-center py-3 rounded-lg text-left transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:focus:ring-orange-400 focus:ring-offset-1 focus:ring-offset-gray-800
+                        ${currentView === view ? 'bg-indigo-600 dark:bg-orange-700 text-white shadow-md' : 'hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-indigo-300 dark:hover:text-orange-400'}
                         ${showText ? 'px-4 space-x-3' : 'lg:px-0 lg:justify-center lg:py-3'}`}
               title={view}
             >
@@ -242,7 +242,7 @@ const Sidebar = ({ isMobileSidebarOpen, isDesktopSidebarCollapsed, currentView, 
       <div className={`p-4 border-t border-gray-700 dark:border-gray-750 space-y-2 transition-all duration-300 ${showText ? '' : 'lg:px-2'}`}>
         <button
           onClick={toggleDarkMode}
-          className={`w-full flex items-center py-3 rounded-lg text-left transition-all duration-200 ease-in-out bg-gray-700 dark:bg-gray-800 hover:bg-gray-600 dark:hover:bg-gray-700 group focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-1 focus:ring-offset-gray-800
+          className={`w-full flex items-center py-3 rounded-lg text-left transition-all duration-200 ease-in-out bg-gray-700 dark:bg-gray-800 hover:bg-gray-600 dark:hover:bg-gray-700 group focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:focus:ring-orange-400 focus:ring-offset-1 focus:ring-offset-gray-800
                       ${showText ? 'px-4 space-x-3' : 'lg:px-0 lg:justify-center'}`}
           title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
         >
@@ -307,10 +307,14 @@ const App = () => {
     try {
       const response = await fetch('http://nipunup.com/php/get_announcement.php');
       const data = await response.json();
-      setGymAnnouncements(data.announcements || []);
+      if (data.announcements) {
+        setGymAnnouncements(data.announcements);
+      }
     } catch (err) {
       console.error('Error fetching announcements:', err);
-      showNotification('Server error while fetching announcements.', 'error');
+      if (showNotification) {
+        showNotification('Server error while fetching announcements.', 'error');
+      }
     }
   };
 
@@ -570,11 +574,36 @@ const App = () => {
     }
   };
 
-  const markAsPaid = (clientId) => {
-    setClientsData(clientsData.map(client =>
-      client.id === clientId ? { ...client, feeStatus: 'Paid', lastPaymentDate: new Date().toISOString().split('T')[0] } : client
-    ));
-    showNotification('Fee status updated to Paid.', 'success');
+  const markAsPaid = async (clientId) => {
+    try {
+      const response = await fetch('http://nipunup.com/php/update_fee_status.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ clientId })
+      });
+
+      const data = await response.json();
+      
+      if (data.success) {
+        // Update local state with new payment dates
+        setClientsData(clientsData.map(client =>
+          client.id === clientId ? {
+            ...client,
+            feeStatus: 'Paid',
+            lastPaymentDate: data.lastPaymentDate,
+            nextDueDate: data.nextDueDate
+          } : client
+        ));
+        showNotification('Fee status updated to Paid.', 'success');
+      } else {
+        showNotification(data.error || 'Failed to update fee status.', 'error');
+      }
+    } catch (err) {
+      console.error('Error updating fee status:', err);
+      showNotification('Server error while updating fee status.', 'error');
+    }
   };
 
   const addAnnouncement = async (announcement) => {
@@ -619,7 +648,18 @@ const App = () => {
         case 'Dashboard': return <DashboardView clients={clientsData} announcements={gymAnnouncements} />;
         case 'Clients': return <ClientsView clients={filteredClients} onAddClient={handleAddNewClient} onEditClient={handleEditClient} onDeleteClient={deleteClient} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />;
         case 'Fees': return <FeesView clients={clientsData} onSendReminder={sendFeeReminder} onMarkAsPaid={markAsPaid} />;
-        case 'Notifications': return <NotificationsView announcements={gymAnnouncements} onAddAnnouncement={addAnnouncement} />;
+        case 'Notifications': return <NotificationsView 
+          announcements={gymAnnouncements} 
+          onAddAnnouncement={addAnnouncement} 
+          showNotification={showNotification}
+          onRefresh={setGymAnnouncements} 
+        />;
+        case 'Announcements': return <NotificationsView 
+          announcements={gymAnnouncements} 
+          onAddAnnouncement={null} 
+          showNotification={showNotification}
+          onRefresh={setGymAnnouncements}
+        />;
         case 'Gallery': return <GalleryView images={galleryImages} />;
         case 'BrandIcon': return <BrandIconView />;
         case 'About Us': return <AboutUsView />;
@@ -630,7 +670,7 @@ const App = () => {
     } else if (currentUser.role === 'client') {
       switch (currentView) {
         case 'My Profile': return <ClientProfileView client={currentUser} allClientsData={clientsData} />;
-        case 'Announcements': return <NotificationsView announcements={gymAnnouncements} onAddAnnouncement={null} />;
+        case 'Announcements': return <NotificationsView announcements={gymAnnouncements} onAddAnnouncement={null} showNotification={showNotification} />;
         case 'Gallery': return <GalleryView images={galleryImages} />;
         case 'About Us': return <AboutUsView />;
         case 'Contact': return <ContactView />;
@@ -710,7 +750,7 @@ const ClientProfileView = ({ client, allClientsData }) => {
           <img 
             src={currentClientData.avatar || `https://placehold.co/150x150/EAEAEA/333?text=${currentClientData.name.substring(0,2).toUpperCase()}`} 
             alt={currentClientData.name} 
-            className="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover border-4 border-indigo-500 dark:border-indigo-400"
+            className="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover border-4 border-indigo-500 dark:border-orange-400"
             onError={(e) => e.target.src='https://placehold.co/150x150/CCCCCC/FFFFFF?text=User'}
           />
           <div className="flex-1 text-center sm:text-left">
@@ -790,6 +830,7 @@ const StatCard = ({ title, value, icon, color }) => {
     blue: { border: 'border-blue-500 dark:border-blue-400', bg: 'bg-blue-100 dark:bg-blue-800', text: 'text-blue-500 dark:text-blue-300' },
     green: { border: 'border-green-500 dark:border-green-400', bg: 'bg-green-100 dark:bg-green-800', text: 'text-green-500 dark:text-green-300' },
     red: { border: 'border-red-500 dark:border-red-400', bg: 'bg-red-100 dark:bg-red-800', text: 'text-red-500 dark:text-red-300' },
+    orange: { border: 'border-orange-500 dark:border-orange-400', bg: 'bg-orange-100 dark:bg-orange-800', text: 'text-orange-500 dark:text-orange-300' }, // Added orange
   };
   const C = colors[color] || colors.blue;
   return (
@@ -840,7 +881,7 @@ const ClientsView = ({ clients, onAddClient, onEditClient, onDeleteClient, searc
                   <td className="px-6 py-4 whitespace-nowrap text-sm">{client.membershipType}</td>
                   <td className="px-6 py-4"><span className={`px-2.5 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full ${client.feeStatus === 'Paid' ? 'bg-green-100 text-green-800 dark:bg-green-700 dark:text-green-100' : client.feeStatus === 'Pending' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-700 dark:text-yellow-100' : 'bg-red-100 text-red-800 dark:bg-red-700 dark:text-red-100'}`}>{client.feeStatus}</span></td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-1">
-                    <button onClick={() => toggleClientDetails(client.id)} className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-600 transition focus:outline-none focus:ring-1 focus:ring-indigo-500" title="View Details">{expandedClient === client.id ? <ChevronUp size={18} /> : <ChevronDown size={18} />}</button>
+                    <button onClick={() => toggleClientDetails(client.id)} className="text-indigo-600 hover:text-indigo-900 dark:text-orange-400 dark:hover:text-orange-300 p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-600 transition focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:focus:ring-orange-500" title="View Details">{expandedClient === client.id ? <ChevronUp size={18} /> : <ChevronDown size={18} />}</button>
                     <button onClick={() => onEditClient(client)} className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-600 transition focus:outline-none focus:ring-1 focus:ring-blue-500" title="Edit Client"><Edit2 size={18} /></button>
                     <button onClick={() => onDeleteClient(client.id)} className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-600 transition focus:outline-none focus:ring-1 focus:ring-red-500" title="Delete Client"><Trash2 size={18} /></button>
                   </td>
@@ -944,7 +985,7 @@ const ClientFormModal = ({ onClose, onSave, client, showNotification }) => {
       <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-gray-800 dark:text-white">{client ? 'Edit Client' : 'Add New Client'}</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500 rounded-sm p-1">
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:focus:ring-orange-500 rounded-sm p-1">
             <X size={24} />
           </button>
         </div>
@@ -1054,7 +1095,7 @@ const ClientFormModal = ({ onClose, onSave, client, showNotification }) => {
           </div>
         </form>
       </div>
-      <style jsx>{`.input-style { @apply px-3 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white; }`}</style>
+      <style jsx>{`.input-style { @apply px-3 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-orange-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white; }`}</style>
     </div>
   );
 };
@@ -1065,38 +1106,245 @@ const FeesView = ({ clients, onSendReminder, onMarkAsPaid }) => {
     <div className="space-y-6">
       <h1 className="text-3xl font-bold text-gray-800 dark:text-white">Fee Management</h1>
       {pendingFeesClients.length > 0 ? (
-        <div className="bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden"><div className="overflow-x-auto"><table className="w-full min-w-[700px] table-auto"><thead className="bg-gray-50 dark:bg-gray-700"><tr>{['Client Name', 'Email', 'Membership', 'Amount Due', 'Due Date', 'Status', 'Actions'].map(header => <th key={header} className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{header}</th>)}</tr></thead><tbody className="text-gray-700 dark:text-gray-300 divide-y divide-gray-200 dark:divide-gray-700">{pendingFeesClients.map(client => (<tr key={client.id} className="hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors"><td className="px-6 py-4 font-medium whitespace-nowrap">{client.name}</td><td className="px-6 py-4 whitespace-nowrap text-sm">{client.email}</td><td className="px-6 py-4 whitespace-nowrap text-sm">{client.membershipType}</td><td className="px-6 py-4 text-sm">${client.feeAmount}</td><td className="px-6 py-4 whitespace-nowrap text-sm">{client.nextDueDate ? new Date(client.nextDueDate).toLocaleDateString() : 'N/A'}</td><td className="px-6 py-4"><span className={`px-2.5 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full ${client.feeStatus === 'Pending' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-700 dark:text-yellow-100' : 'bg-red-100 text-red-800 dark:bg-red-700 dark:text-red-100'}`}>{client.feeStatus}</span></td><td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2"><button onClick={() => onMarkAsPaid(client.id)} className="bg-green-500 hover:bg-green-600 text-white text-xs font-semibold py-1.5 px-3 rounded-md transition focus:outline-none focus:ring-1 focus:ring-green-500">Mark Paid</button><button onClick={() => onSendReminder(client)} className="bg-blue-500 hover:bg-blue-600 text-white text-xs font-semibold py-1.5 px-3 rounded-md transition flex items-center focus:outline-none focus:ring-1 focus:ring-blue-500"><Send size={14} className="mr-1" /> Reminder</button></td></tr>))}</tbody></table></div></div>
-      ) : (<div className="text-center py-8"><DollarSign size={48} className="mx-auto text-green-500 dark:text-green-400 mb-4" /><p className="text-gray-600 dark:text-gray-400 text-lg">No pending fees. Everyone is up to date!</p></div>)}
+        <div className="bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[700px] table-auto">
+              <thead className="bg-gray-50 dark:bg-gray-700">
+                <tr>
+                  {['Client Name', 'Email', 'Membership', 'Amount Due', 'Due Date', 'Status', 'Actions'].map(header => 
+                    <th key={header} className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                      {header}
+                    </th>
+                  )}
+                </tr>
+              </thead>
+              <tbody className="text-gray-700 dark:text-gray-300 divide-y divide-gray-200 dark:divide-gray-700">
+                {pendingFeesClients.map(client => (
+                  <tr key={client.id} className="hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors">
+                    <td className="px-6 py-4 font-medium whitespace-nowrap">{client.name}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm">{client.email}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm">{client.membershipType}</td>
+                    <td className="px-6 py-4 text-sm">${client.feeAmount}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm">
+                      {client.nextDueDate ? new Date(client.nextDueDate).toLocaleDateString() : 'N/A'}
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className={`px-2.5 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                        client.feeStatus === 'Pending' 
+                          ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-700 dark:text-yellow-100' 
+                          : 'bg-red-100 text-red-800 dark:bg-red-700 dark:text-red-100'
+                      }`}>
+                        {client.feeStatus}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      <div className="flex flex-col space-y-2">
+                        <button 
+                          onClick={() => onMarkAsPaid(client.id)} 
+                          className="w-full bg-green-500 hover:bg-green-600 text-white text-xs font-semibold py-2 px-3 rounded-md transition focus:outline-none focus:ring-1 focus:ring-green-500 flex items-center justify-center"
+                        >
+                          <DollarSign size={14} className="mr-1" /> Mark Paid
+                        </button>
+                        <button 
+                          onClick={() => onSendReminder(client)} 
+                          className="w-full bg-blue-500 hover:bg-blue-600 text-white text-xs font-semibold py-2 px-3 rounded-md transition focus:outline-none focus:ring-1 focus:ring-blue-500 flex items-center justify-center"
+                        >
+                          <Send size={14} className="mr-1" /> Send Reminder
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ) : (
+        <div className="text-center py-8">
+          <DollarSign size={48} className="mx-auto text-green-500 dark:text-green-400 mb-4" />
+          <p className="text-gray-600 dark:text-gray-400 text-lg">No pending fees. Everyone is up to date!</p>
+        </div>
+      )}
     </div>
   );
 };
 
-const NotificationsView = ({ announcements, onAddAnnouncement }) => {
+const NotificationsView = ({ announcements, onAddAnnouncement, showNotification, onRefresh }) => {
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [formError, setFormError] = useState('');
+  const [editingAnnouncement, setEditingAnnouncement] = useState(null);
+  const [localAnnouncements, setLocalAnnouncements] = useState(announcements);
 
-  const handleSubmit = (e) => { e.preventDefault(); if (!title.trim() || !content.trim()) { setFormError("Title and Content cannot be empty."); return; } setFormError(''); onAddAnnouncement({ title, content }); setTitle(''); setContent(''); setShowForm(false); };
+  // Update local announcements when prop changes
+  useEffect(() => {
+    setLocalAnnouncements(announcements);
+  }, [announcements]);
+
+  const fetchAnnouncements = async () => {
+    try {
+      const response = await fetch('http://nipunup.com/php/get_announcement.php');
+      const data = await response.json();
+      if (data.announcements) {
+        setLocalAnnouncements(data.announcements);
+        // Update parent component's state
+        if (onRefresh) {
+          onRefresh(data.announcements);
+        }
+      }
+    } catch (err) {
+      console.error('Error fetching announcements:', err);
+      if (showNotification) {
+        showNotification('Server error while fetching announcements.', 'error');
+      }
+    }
+  };
+
+  const handleSubmit = (e) => { 
+    e.preventDefault(); 
+    if (!title.trim() || !content.trim()) { 
+      setFormError("Title and Content cannot be empty."); 
+      return; 
+    } 
+    setFormError(''); 
+    onAddAnnouncement({ 
+      title, 
+      content,
+      id: editingAnnouncement?.id // Include ID if editing
+    }); 
+    setTitle(''); 
+    setContent(''); 
+    setShowForm(false);
+    setEditingAnnouncement(null);
+  };
+
+  const handleEdit = (announcement) => {
+    setEditingAnnouncement(announcement);
+    setTitle(announcement.title);
+    setContent(announcement.content);
+    setShowForm(true);
+  };
+
+  const handleDelete = async (announcementId) => {
+    if (!window.confirm('Are you sure you want to delete this announcement?')) return;
+    
+    try {
+      const response = await fetch('http://nipunup.com/php/delete_announcement.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: announcementId })
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        if (showNotification) {
+          showNotification('Announcement deleted successfully!', 'success');
+        }
+        // Fetch fresh data after successful deletion
+        await fetchAnnouncements();
+      } else {
+        if (showNotification) {
+          showNotification(data.error || 'Failed to delete announcement.', 'error');
+        }
+      }
+    } catch (err) {
+      console.error('Error deleting announcement:', err);
+      if (showNotification) {
+        showNotification('Server error while deleting announcement.', 'error');
+      }
+    }
+  };
 
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h1 className="text-3xl font-bold text-gray-800 dark:text-white">Gym Announcements</h1>
-        {onAddAnnouncement && (<button onClick={() => { setShowForm(!showForm); setFormError(''); setTitle(''); setContent('');}} className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md flex items-center transition self-start sm:self-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">{showForm ? <><X size={20} className="mr-2" /> Cancel</> : <><PlusCircle size={20} className="mr-2" /> New Announcement</>}</button>)}
+        {onAddAnnouncement && (
+          <button 
+            onClick={() => { 
+              setShowForm(!showForm); 
+              setFormError(''); 
+              setTitle(''); 
+              setContent('');
+              setEditingAnnouncement(null);
+            }} 
+            className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md flex items-center transition self-start sm:self-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+          >
+            {showForm ? <><X size={20} className="mr-2" /> Cancel</> : <><PlusCircle size={20} className="mr-2" /> New Announcement</>}
+          </button>
+        )}
       </div>
       {showForm && onAddAnnouncement && (
         <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg space-y-4">
           {formError && <p className="text-sm text-red-500 bg-red-100 dark:bg-red-700 dark:text-red-100 p-3 rounded-md">{formError}</p>}
-          <div><label htmlFor="announcementTitle" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Title</label><input type="text" id="announcementTitle" value={title} onChange={(e) => setTitle(e.target.value)} className="mt-1 block w-full input-style border-gray-300 dark:border-gray-600" /></div>
-          <div><label htmlFor="announcementContent" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Content</label><textarea id="announcementContent" value={content} onChange={(e) => setContent(e.target.value)} rows="4" className="mt-1 block w-full input-style border-gray-300 dark:border-gray-600"></textarea></div>
-          <div className="flex justify-end"><button type="submit" className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md flex items-center transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 dark:focus:ring-offset-gray-800"><Send size={18} className="mr-2" /> Post</button></div>
+          <div>
+            <label htmlFor="announcementTitle" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Title</label>
+            <input 
+              type="text" 
+              id="announcementTitle" 
+              value={title} 
+              onChange={(e) => setTitle(e.target.value)} 
+              className="mt-1 block w-full input-style border-gray-300 dark:border-gray-600" 
+            />
+          </div>
+          <div>
+            <label htmlFor="announcementContent" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Content</label>
+            <textarea 
+              id="announcementContent" 
+              value={content} 
+              onChange={(e) => setContent(e.target.value)} 
+              rows="4" 
+              className="mt-1 block w-full input-style border-gray-300 dark:border-gray-600"
+            ></textarea>
+          </div>
+          <div className="flex justify-end">
+            <button 
+              type="submit" 
+              className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md flex items-center transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 dark:focus:ring-offset-gray-800"
+            >
+              <Send size={18} className="mr-2" /> {editingAnnouncement ? 'Update' : 'Post'}
+            </button>
+          </div>
         </form>
       )}
       <div className="space-y-4">
-        {announcements.length > 0 ? announcements.map(ann => (
-          <div key={ann.id} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg"><h2 className="text-xl font-semibold text-indigo-700 dark:text-indigo-400">{ann.title}</h2><p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Posted on: {new Date(ann.date).toLocaleDateString()}</p><p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{ann.content}</p></div>
-        )) : (<div className="text-center py-8"><Bell size={48} className="mx-auto text-gray-400 dark:text-gray-500 mb-4" /><p className="text-gray-600 dark:text-gray-400 text-lg">No announcements posted yet.</p></div>)}
+        {localAnnouncements.length > 0 ? localAnnouncements.map(ann => (
+          <div key={ann.id} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+            <div className="flex justify-between items-start">
+              <div>
+                <h2 className="text-xl font-semibold text-indigo-700 dark:text-orange-400">{ann.title}</h2>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Posted on: {new Date(ann.date).toLocaleDateString()}</p>
+                <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{ann.content}</p>
+              </div>
+              {onAddAnnouncement && (
+                <div className="flex space-x-2">
+                  <button
+                    onClick={() => handleEdit(ann)}
+                    className="p-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    title="Edit Announcement"
+                  >
+                    <Edit2 size={18} />
+                  </button>
+                  <button
+                    onClick={() => handleDelete(ann.id)}
+                    className="p-2 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    title="Delete Announcement"
+                  >
+                    <Trash2 size={18} />
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        )) : (
+          <div className="text-center py-8">
+            <Bell size={48} className="mx-auto text-gray-400 dark:text-gray-500 mb-4" />
+            <p className="text-gray-600 dark:text-gray-400 text-lg">No announcements posted yet.</p>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -1188,8 +1436,8 @@ const ContactView = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <div className="flex items-start space-x-3">
-              <div className="p-2 bg-indigo-100 dark:bg-indigo-900 rounded-lg">
-                <svg className="w-6 h-6 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="p-2 bg-indigo-100 dark:bg-orange-900 rounded-lg">
+                <svg className="w-6 h-6 text-indigo-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
@@ -1201,8 +1449,8 @@ const ContactView = () => {
             </div>
 
             <div className="flex items-start space-x-3">
-              <div className="p-2 bg-indigo-100 dark:bg-indigo-900 rounded-lg">
-                <svg className="w-6 h-6 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="p-2 bg-indigo-100 dark:bg-orange-900 rounded-lg">
+                <svg className="w-6 h-6 text-indigo-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
               </div>
@@ -1213,8 +1461,8 @@ const ContactView = () => {
             </div>
 
             <div className="flex items-start space-x-3">
-              <div className="p-2 bg-indigo-100 dark:bg-indigo-900 rounded-lg">
-                <svg className="w-6 h-6 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="p-2 bg-indigo-100 dark:bg-orange-900 rounded-lg">
+                <svg className="w-6 h-6 text-indigo-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
@@ -1360,7 +1608,7 @@ const SettingsView = ({ userRole, currentUser, showNotification }) => {
                     type={showCurrentPassword ? "text" : "password"}
                     value={currentPassword}
                     onChange={(e) => setCurrentPassword(e.target.value)}
-                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-orange-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
                     required
                   />
                   <button
@@ -1380,7 +1628,7 @@ const SettingsView = ({ userRole, currentUser, showNotification }) => {
                     type={showNewPassword ? "text" : "password"}
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
-                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-orange-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
                     required
                   />
                   <button
@@ -1400,7 +1648,7 @@ const SettingsView = ({ userRole, currentUser, showNotification }) => {
                     type={showConfirmPassword ? "text" : "password"}
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-orange-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
                     required
                   />
                   <button
