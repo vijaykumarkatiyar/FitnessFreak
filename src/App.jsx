@@ -171,7 +171,7 @@ const Sidebar = ({ isMobileSidebarOpen, isDesktopSidebarCollapsed, currentView, 
     >
       <div className={`flex items-center justify-center h-16 border-b border-gray-700 dark:border-gray-750 transition-all duration-300 ${showText ? 'px-4' : 'lg:px-2'}`}>
         <img src="/img/symbol.jpeg" alt="Fitness Freak Logo" className={`transition-all duration-200 ${showText ? 'mr-2' : 'lg:mx-auto'} bg-white dark:bg-gray-900`} style={{ width: showText ? 32 : 28, height: showText ? 32 : 28, borderRadius: '8px', objectFit: 'cover' }} />
-        <h1 className={`font-bold text-indigo-400 dark:text-orange-500 transition-opacity duration-200 ${showText ? 'text-2xl opacity-100' : 'lg:opacity-0 lg:text-[0px] lg:hidden'}`}>
+        <h1 className={`font-bold text-red-400 dark:text-red-500 transition-opacity duration-200 hover:text-red-500 dark:hover:text-red-400 ${showText ? 'text-2xl opacity-100' : 'lg:opacity-0 lg:text-[0px] lg:hidden'}`}>
           Fitness Freak
         </h1>
       </div>
@@ -184,8 +184,8 @@ const Sidebar = ({ isMobileSidebarOpen, isDesktopSidebarCollapsed, currentView, 
               <div key="Gallery" className="space-y-1">
                 <button
                   onClick={() => setCurrentView('Gallery')}
-                  className={`w-full flex items-center py-3 rounded-lg text-left transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:focus:ring-orange-400 focus:ring-offset-1 focus:ring-offset-gray-800
-                    ${currentView === 'Gallery' || currentView === 'BrandIcon' ? 'bg-indigo-600 dark:bg-orange-700 text-white shadow-md' : 'hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-indigo-300 dark:hover:text-orange-400'}
+                  className={`w-full flex items-center py-3 rounded-lg text-left transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-red-400 dark:focus:ring-red-400 focus:ring-offset-1 focus:ring-offset-gray-800
+                    ${currentView === 'Gallery' || currentView === 'BrandIcon' ? 'bg-red-600 dark:bg-red-700 text-white shadow-md' : 'hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-red-500 dark:hover:text-red-400'}
                     ${showText ? 'px-4 space-x-3' : 'lg:px-0 lg:justify-center lg:py-3'}`}
                   title="Gallery"
                 >
@@ -198,8 +198,8 @@ const Sidebar = ({ isMobileSidebarOpen, isDesktopSidebarCollapsed, currentView, 
                   <div className="ml-8 space-y-1">
                     <button
                       onClick={() => setCurrentView('Gallery')}
-                      className={`w-full flex items-center py-2 rounded-lg text-left text-sm transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:focus:ring-orange-400 focus:ring-offset-1 focus:ring-offset-gray-800
-                        ${currentView === 'Gallery' ? 'bg-indigo-500 dark:bg-orange-600 text-white' : 'hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-indigo-300 dark:hover:text-orange-400'}
+                      className={`w-full flex items-center py-2 rounded-lg text-left text-sm transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-red-400 dark:focus:ring-red-400 focus:ring-offset-1 focus:ring-offset-gray-800
+                        ${currentView === 'Gallery' ? 'bg-red-500 dark:bg-red-600 text-white' : 'hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-red-500 dark:hover:text-red-400'}
                         px-2`}
                       title="Gallery"
                     >
@@ -207,8 +207,8 @@ const Sidebar = ({ isMobileSidebarOpen, isDesktopSidebarCollapsed, currentView, 
                     </button>
                     <button
                       onClick={() => setCurrentView('BrandIcon')}
-                      className={`w-full flex items-center py-2 rounded-lg text-left text-sm transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:focus:ring-orange-400 focus:ring-offset-1 focus:ring-offset-gray-800
-                        ${currentView === 'BrandIcon' ? 'bg-indigo-500 dark:bg-orange-600 text-white' : 'hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-indigo-300 dark:hover:text-orange-400'}
+                      className={`w-full flex items-center py-2 rounded-lg text-left text-sm transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-red-400 dark:focus:ring-red-400 focus:ring-offset-1 focus:ring-offset-gray-800
+                        ${currentView === 'BrandIcon' ? 'bg-red-500 dark:bg-red-600 text-white' : 'hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-red-500 dark:hover:text-red-400'}
                         px-2`}
                       title="BrandIcon"
                     >
@@ -227,8 +227,8 @@ const Sidebar = ({ isMobileSidebarOpen, isDesktopSidebarCollapsed, currentView, 
                 setCurrentView(view);
                 if (isMobileSidebarOpen) closeMobileSidebar();
               }}
-              className={`w-full flex items-center py-3 rounded-lg text-left transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:focus:ring-orange-400 focus:ring-offset-1 focus:ring-offset-gray-800
-                        ${currentView === view ? 'bg-indigo-600 dark:bg-orange-700 text-white shadow-md' : 'hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-indigo-300 dark:hover:text-orange-400'}
+              className={`w-full flex items-center py-3 rounded-lg text-left transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-red-400 dark:focus:ring-red-400 focus:ring-offset-1 focus:ring-offset-gray-800
+                        ${currentView === view ? 'bg-red-600 dark:bg-red-700 text-white shadow-md' : 'hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-red-500 dark:hover:text-red-400'}
                         ${showText ? 'px-4 space-x-3' : 'lg:px-0 lg:justify-center lg:py-3'}`}
               title={view}
             >
@@ -242,12 +242,12 @@ const Sidebar = ({ isMobileSidebarOpen, isDesktopSidebarCollapsed, currentView, 
       <div className={`p-4 border-t border-gray-700 dark:border-gray-750 space-y-2 transition-all duration-300 ${showText ? '' : 'lg:px-2'}`}>
         <button
           onClick={toggleDarkMode}
-          className={`w-full flex items-center py-3 rounded-lg text-left transition-all duration-200 ease-in-out bg-gray-700 dark:bg-gray-800 hover:bg-gray-600 dark:hover:bg-gray-700 group focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:focus:ring-orange-400 focus:ring-offset-1 focus:ring-offset-gray-800
+          className={`w-full flex items-center py-3 rounded-lg text-left transition-all duration-200 ease-in-out bg-gray-700 dark:bg-gray-800 hover:bg-gray-600 dark:hover:bg-gray-700 group focus:outline-none focus:ring-2 focus:ring-red-400 dark:focus:ring-red-400 focus:ring-offset-1 focus:ring-offset-gray-800
                       ${showText ? 'px-4 space-x-3' : 'lg:px-0 lg:justify-center'}`}
           title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
         >
           {darkMode ? <Sun size={24} className={!showText ? 'lg:mx-auto' : ''} /> : <Moon size={24} className={!showText ? 'lg:mx-auto' : ''} />}
-          <span className={`transition-opacity duration-200 ${showText ? 'opacity-100' : 'lg:opacity-0 lg:hidden'}`}>{darkMode ? 'Light Mode' : 'Dark Mode'}</span>
+          <span className={`transition-opacity duration-200 hover:text-red-500 dark:hover:text-red-400 ${showText ? 'opacity-100' : 'lg:opacity-0 lg:hidden'}`}>{darkMode ? 'Light Mode' : 'Dark Mode'}</span>
         </button>
         <button
           onClick={onLogout}
@@ -741,6 +741,12 @@ const App = () => {
 // Client Profile View
 const ClientProfileView = ({ client, allClientsData }) => {
   const currentClientData = allClientsData.find(c => c.id === client.id) || client;
+  const [imageError, setImageError] = useState(false);
+
+  const handleImageError = (e) => {
+    setImageError(true);
+    e.target.src = `https://placehold.co/150x150/CCCCCC/FFFFFF?text=${currentClientData.name.substring(0,2).toUpperCase()}`;
+  };
 
   return (
     <div className="space-y-6">
@@ -748,15 +754,15 @@ const ClientProfileView = ({ client, allClientsData }) => {
       <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-xl shadow-lg">
         <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
           <img 
-            src={currentClientData.avatar || `https://placehold.co/150x150/EAEAEA/333?text=${currentClientData.name.substring(0,2).toUpperCase()}`} 
+            src={!imageError && currentClientData.avatar ? currentClientData.avatar : `https://placehold.co/150x150/CCCCCC/FFFFFF?text=${currentClientData.name.substring(0,2).toUpperCase()}`}
             alt={currentClientData.name} 
-            className="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover border-4 border-indigo-500 dark:border-orange-400"
-            onError={(e) => e.target.src='https://placehold.co/150x150/CCCCCC/FFFFFF?text=User'}
+            className="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover border-4 border-red-500 dark:border-red-400"
+            onError={handleImageError}
           />
           <div className="flex-1 text-center sm:text-left">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white">{currentClientData.name}</h2>
-            <p className="text-gray-600 dark:text-gray-400">{currentClientData.email}</p>
-            <p className="text-gray-600 dark:text-gray-400">{currentClientData.phone}</p>
+            <p className="text-gray-600 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400">{currentClientData.email}</p>
+            <p className="text-gray-600 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400">{currentClientData.phone}</p>
             <span className={`mt-2 inline-block px-3 py-1 rounded-full text-sm font-semibold
               ${currentClientData.feeStatus === 'Paid' ? 'bg-green-100 text-green-700 dark:bg-green-700 dark:text-green-100' :
                 currentClientData.feeStatus === 'Pending' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-700 dark:text-yellow-100' :
@@ -830,7 +836,7 @@ const StatCard = ({ title, value, icon, color }) => {
     blue: { border: 'border-blue-500 dark:border-blue-400', bg: 'bg-blue-100 dark:bg-blue-800', text: 'text-blue-500 dark:text-blue-300' },
     green: { border: 'border-green-500 dark:border-green-400', bg: 'bg-green-100 dark:bg-green-800', text: 'text-green-500 dark:text-green-300' },
     red: { border: 'border-red-500 dark:border-red-400', bg: 'bg-red-100 dark:bg-red-800', text: 'text-red-500 dark:text-red-300' },
-    orange: { border: 'border-orange-500 dark:border-orange-400', bg: 'bg-orange-100 dark:bg-orange-800', text: 'text-orange-500 dark:text-orange-300' }, // Added orange
+    red: { border: 'border-red-500 dark:border-red-400', bg: 'bg-red-100 dark:bg-red-800', text: 'text-red-500 dark:text-red-300' }, // Changed from orange
   };
   const C = colors[color] || colors.blue;
   return (
@@ -850,8 +856,15 @@ const StatCard = ({ title, value, icon, color }) => {
 
 const ClientsView = ({ clients, onAddClient, onEditClient, onDeleteClient, searchTerm, setSearchTerm }) => {
   const [expandedClient, setExpandedClient] = useState(null);
+  const [imageErrors, setImageErrors] = useState({});
+  
   const toggleClientDetails = (clientId) => setExpandedClient(expandedClient === clientId ? null : clientId);
   
+  const handleImageError = (clientId, e) => {
+    setImageErrors(prev => ({ ...prev, [clientId]: true }));
+    e.target.src = `https://placehold.co/100x100/CCCCCC/FFFFFF?text=${clients.find(c => c.id === clientId)?.name.substring(0,2).toUpperCase()}`;
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -873,17 +886,24 @@ const ClientsView = ({ clients, onAddClient, onEditClient, onDeleteClient, searc
             <tbody className="text-gray-700 dark:text-gray-300 divide-y divide-gray-200 dark:divide-gray-700">
               {clients.length > 0 ? clients.map((client) => (
                 <React.Fragment key={client.id}>
-                <tr className="hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors duration-150">
-                  <td className="px-6 py-4"><img src={client.avatar} alt={client.name} className="w-10 h-10 rounded-full object-cover" onError={(e) => e.target.src='https://placehold.co/100x100/CCCCCC/FFFFFF?text=User'}/></td>
-                  <td className="px-6 py-4 font-medium whitespace-nowrap">{client.name}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm">{client.email}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm">{client.phone}</td>
+                <tr className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150">
+                  <td className="px-6 py-4">
+                    <img 
+                      src={!imageErrors[client.id] && client.avatar ? client.avatar : `https://placehold.co/100x100/CCCCCC/FFFFFF?text=${client.name.substring(0,2).toUpperCase()}`}
+                      alt={client.name} 
+                      className="w-10 h-10 rounded-full object-cover" 
+                      onError={(e) => handleImageError(client.id, e)}
+                    />
+                  </td>
+                  <td className="px-6 py-4 font-medium whitespace-nowrap hover:text-red-500 dark:hover:text-red-400">{client.name}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm hover:text-red-500 dark:hover:text-red-400">{client.email}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm hover:text-red-500 dark:hover:text-red-400">{client.phone}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm">{client.membershipType}</td>
                   <td className="px-6 py-4"><span className={`px-2.5 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full ${client.feeStatus === 'Paid' ? 'bg-green-100 text-green-800 dark:bg-green-700 dark:text-green-100' : client.feeStatus === 'Pending' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-700 dark:text-yellow-100' : 'bg-red-100 text-red-800 dark:bg-red-700 dark:text-red-100'}`}>{client.feeStatus}</span></td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-1">
-                    <button onClick={() => toggleClientDetails(client.id)} className="text-indigo-600 hover:text-indigo-900 dark:text-orange-400 dark:hover:text-orange-300 p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-600 transition focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:focus:ring-orange-500" title="View Details">{expandedClient === client.id ? <ChevronUp size={18} /> : <ChevronDown size={18} />}</button>
-                    <button onClick={() => onEditClient(client)} className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-600 transition focus:outline-none focus:ring-1 focus:ring-blue-500" title="Edit Client"><Edit2 size={18} /></button>
-                    <button onClick={() => onDeleteClient(client.id)} className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-600 transition focus:outline-none focus:ring-1 focus:ring-red-500" title="Delete Client"><Trash2 size={18} /></button>
+                    <button onClick={() => toggleClientDetails(client.id)} className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition focus:outline-none focus:ring-1 focus:ring-red-500" title="View Details">{expandedClient === client.id ? <ChevronUp size={18} /> : <ChevronDown size={18} />}</button>
+                    <button onClick={() => onEditClient(client)} className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition focus:outline-none focus:ring-1 focus:ring-blue-500" title="Edit Client"><Edit2 size={18} /></button>
+                    <button onClick={() => onDeleteClient(client.id)} className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition focus:outline-none focus:ring-1 focus:ring-red-500" title="Delete Client"><Trash2 size={18} /></button>
                   </td>
                 </tr>
                 {expandedClient === client.id && (<tr className="bg-gray-50 dark:bg-gray-750"><td colSpan="7" className="px-6 py-4"><div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-2 text-sm"><div><strong>Join Date:</strong> {new Date(client.joinDate).toLocaleDateString()}</div><div><strong>Payment Cycle:</strong> {client.paymentCycle}</div><div><strong>Fee Amount:</strong> ${client.feeAmount}</div><div><strong>Last Payment:</strong> {client.lastPaymentDate ? new Date(client.lastPaymentDate).toLocaleDateString() : 'N/A'}</div><div><strong>Next Due Date:</strong> {client.nextDueDate ? new Date(client.nextDueDate).toLocaleDateString() : 'N/A'}</div></div></td></tr>)}
@@ -931,8 +951,22 @@ const ClientFormModal = ({ onClose, onSave, client, showNotification }) => {
     paymentCycle: 'Monthly',
     feeStatus: 'Pending',
     lastPaymentDate: '',
-    nextDueDate: defaultNextDueDate()
+    nextDueDate: defaultNextDueDate(),
+    avatar: null
   });
+
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(client?.avatar || null);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedImage(file);
+      // Create preview URL
+      const previewUrl = URL.createObjectURL(file);
+      setImagePreview(previewUrl);
+    }
+  };
 
   const [formErrors, setFormErrors] = useState({});
 
@@ -963,18 +997,44 @@ const ClientFormModal = ({ onClose, onSave, client, showNotification }) => {
     if (formErrors[name]) setFormErrors(prev => ({...prev, [name]: null}));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Ensure all date fields are properly formatted before saving
-      const processedData = {
-        ...formData,
-        joinDate: formatDate(formData.joinDate),
-        lastPaymentDate: formatDate(formData.lastPaymentDate),
-        nextDueDate: formatDate(formData.nextDueDate),
-        feeStatus: formData.feeStatus || 'Pending' // Ensure feeStatus is always set
-      };
-      onSave(processedData);
+      try {
+        let avatarUrl = formData.avatar;
+
+        // If there's a new image selected, upload it first
+        if (selectedImage) {
+          const formDataImage = new FormData();
+          formDataImage.append('image', selectedImage);
+          
+          const uploadResponse = await fetch('http://nipunup.com/php/upload_image.php', {
+            method: 'POST',
+            body: formDataImage
+          });
+          
+          const uploadData = await uploadResponse.json();
+          if (uploadData.success) {
+            avatarUrl = uploadData.imageUrl;
+          } else {
+            throw new Error(uploadData.error || 'Failed to upload image');
+          }
+        }
+
+        // Prepare the client data with the new avatar URL
+        const processedData = {
+          ...formData,
+          joinDate: formatDate(formData.joinDate),
+          lastPaymentDate: formatDate(formData.lastPaymentDate),
+          nextDueDate: formatDate(formData.nextDueDate),
+          feeStatus: formData.feeStatus || 'Pending',
+          avatar: avatarUrl
+        };
+
+        onSave(processedData);
+      } catch (error) {
+        showNotification(error.message || 'Error uploading image', 'error');
+      }
     } else {
       showNotification("Please correct the errors in the form.", "error");
     }
@@ -985,11 +1045,37 @@ const ClientFormModal = ({ onClose, onSave, client, showNotification }) => {
       <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-gray-800 dark:text-white">{client ? 'Edit Client' : 'Add New Client'}</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:focus:ring-orange-500 rounded-sm p-1">
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none focus:ring-1 focus:ring-red-500 rounded-sm p-1">
             <X size={24} />
           </button>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Add image upload section at the top */}
+          <div className="flex flex-col items-center space-y-4">
+            <div className="relative">
+              <img 
+                src={imagePreview || `https://placehold.co/150x150/CCCCCC/FFFFFF?text=${formData.name.substring(0,2).toUpperCase()}`}
+                alt="Profile Preview" 
+                className="w-32 h-32 rounded-full object-cover border-4 border-red-500 dark:border-red-400"
+              />
+              <label 
+                htmlFor="avatar-upload" 
+                className="absolute bottom-0 right-0 bg-red-500 text-white p-2 rounded-full cursor-pointer hover:bg-red-600 transition-colors"
+              >
+                <Edit2 size={20} />
+              </label>
+              <input
+                type="file"
+                id="avatar-upload"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="hidden"
+              />
+            </div>
+            <p className="text-sm text-gray-500 dark:text-gray-400">Click the edit icon to change profile picture</p>
+          </div>
+
+          {/* Rest of the form fields */}
           <div><label htmlFor="clientform-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Full Name</label><input type="text" name="name" id="clientform-name" value={formData.name} onChange={handleChange} className={`mt-1 block w-full input-style ${formErrors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`} />{formErrors.name && <p className="text-xs text-red-500 mt-1">{formErrors.name}</p>}</div>
           <div><label htmlFor="clientform-email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email Address</label><input type="email" name="email" id="clientform-email" value={formData.email} onChange={handleChange} className={`mt-1 block w-full input-style ${formErrors.email ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`} />{formErrors.email && <p className="text-xs text-red-500 mt-1">{formErrors.email}</p>}</div>
           <div><label htmlFor="clientform-phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone Number</label><input type="tel" name="phone" id="clientform-phone" value={formData.phone} onChange={handleChange} className={`mt-1 block w-full input-style ${formErrors.phone ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`} />{formErrors.phone && <p className="text-xs text-red-500 mt-1">{formErrors.phone}</p>}</div>
@@ -1120,7 +1206,7 @@ const FeesView = ({ clients, onSendReminder, onMarkAsPaid }) => {
               </thead>
               <tbody className="text-gray-700 dark:text-gray-300 divide-y divide-gray-200 dark:divide-gray-700">
                 {pendingFeesClients.map(client => (
-                  <tr key={client.id} className="hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors">
+                  <tr key={client.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150">
                     <td className="px-6 py-4 font-medium whitespace-nowrap">{client.name}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">{client.email}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">{client.membershipType}</td>
@@ -1271,7 +1357,7 @@ const NotificationsView = ({ announcements, onAddAnnouncement, showNotification,
               setContent('');
               setEditingAnnouncement(null);
             }} 
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md flex items-center transition self-start sm:self-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+            className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md flex items-center transition self-start sm:self-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800 dark:focus:ring-red-500"
           >
             {showForm ? <><X size={20} className="mr-2" /> Cancel</> : <><PlusCircle size={20} className="mr-2" /> New Announcement</>}
           </button>
@@ -1436,8 +1522,8 @@ const ContactView = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <div className="flex items-start space-x-3">
-              <div className="p-2 bg-indigo-100 dark:bg-orange-900 rounded-lg">
-                <svg className="w-6 h-6 text-indigo-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="p-2 bg-indigo-100 dark:bg-red-900 rounded-lg">
+                <svg className="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
@@ -1449,8 +1535,8 @@ const ContactView = () => {
             </div>
 
             <div className="flex items-start space-x-3">
-              <div className="p-2 bg-indigo-100 dark:bg-orange-900 rounded-lg">
-                <svg className="w-6 h-6 text-indigo-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="p-2 bg-indigo-100 dark:bg-red-900 rounded-lg">
+                <svg className="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
               </div>
@@ -1461,8 +1547,8 @@ const ContactView = () => {
             </div>
 
             <div className="flex items-start space-x-3">
-              <div className="p-2 bg-indigo-100 dark:bg-orange-900 rounded-lg">
-                <svg className="w-6 h-6 text-indigo-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="p-2 bg-indigo-100 dark:bg-red-900 rounded-lg">
+                <svg className="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
