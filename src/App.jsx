@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Users, DollarSign, Bell, Image as ImageIcon, PlusCircle, Edit2, Trash2, Send, Search, ChevronDown, ChevronUp, BarChart2, Calendar, Settings, LogOut, User, Shield, Sun, Moon, Menu as MenuIcon, X, UserCircle, Key, Eye, EyeOff, UserCheck } from 'lucide-react'; // UserX was not used, removed.
+import { Users, DollarSign, Bell, Image as ImageIcon, PlusCircle, Edit2, Trash2, Send, Search, ChevronDown, ChevronUp, BarChart2, Calendar, Settings, LogOut, User, Shield, Sun, Moon, Menu as MenuIcon, X, UserCircle, Key, Eye, EyeOff, UserCheck, Phone } from 'lucide-react'; // UserX was not used, removed.
 
 // --- Mock Data & Initial State ---
 const initialClients = [
@@ -9,11 +9,6 @@ const initialClients = [
 ];
 
 const adminCredentials = { email: 'admin@fitnessfreak.com', password: 'adminpassword', role: 'admin', name: 'Admin User' };
-
-const initialGymAnnouncements = [
-  { id: 1, title: 'New Yoga Class!', content: 'Starting next Monday at 6 PM. Sign up at the front desk!', date: '2024-05-10' },
-  { id: 2, title: 'Holiday Hours', content: 'The gym will be closed on Memorial Day.', date: '2024-05-05' },
-];
 
 const initialGalleryImages = [
   { id: 1, url: 'https://placehold.co/600x400/007BFF/FFFFFF?text=Gym+Interior+1', caption: 'Spacious workout area' },
@@ -142,8 +137,8 @@ const Header = ({ currentUser, toggleMobileSidebar, currentView, isDesktopSideba
 
 const Sidebar = ({ isMobileSidebarOpen, isDesktopSidebarCollapsed, currentView, setCurrentView, darkMode, toggleDarkMode, closeMobileSidebar, userRole, onLogout }) => {
   
-  const adminNavItems = ['Dashboard', 'Clients', 'Fees', 'Notifications', 'Gallery', 'Settings'];
-  const clientNavItems = ['My Profile', 'Announcements', 'Gallery', 'Settings'];
+  const adminNavItems = ['Dashboard', 'Clients', 'Fees', 'Notifications', 'Gallery', 'About Us', 'Contact', 'Settings'];
+  const clientNavItems = ['My Profile', 'Announcements', 'Gallery', 'About Us', 'Contact', 'Settings'];
   const navItems = userRole === 'admin' ? adminNavItems : clientNavItems;
 
   const getIcon = (view) => {
@@ -158,6 +153,8 @@ const Sidebar = ({ isMobileSidebarOpen, isDesktopSidebarCollapsed, currentView, 
       case 'Settings': return <Settings {...iconProps} />;
       case 'My Profile': return <UserCheck {...iconProps} />;
       case 'BrandIcon': return <ImageIcon {...iconProps} />;
+      case 'About Us': return <User {...iconProps} />;
+      case 'Contact': return <Phone {...iconProps} />;
       default: return null;
     }
   };
@@ -289,15 +286,33 @@ const App = () => {
   
   const [currentView, setCurrentView] = useState('');
   const [clientsData, setClientsData] = useState([]);
-  const [gymAnnouncements, setGymAnnouncements] = useState(initialGymAnnouncements);
+  const [gymAnnouncements, setGymAnnouncements] = useState([]);
   const [galleryImages] = useState(initialGalleryImages);
   const [searchTerm, setSearchTerm] = useState('');
   const [showAddClientModal, setShowAddClientModal] = useState(false);
   const [editingClient, setEditingClient] = useState(null);
   const [notification, setNotification] = useState({ text: '', type: '' });
-  const [darkMode, setDarkMode] = useState(false); // Default to light mode
+  const [darkMode, setDarkMode] = useState(false);
   
   const [isDesktopSidebarCollapsed, setIsDesktopSidebarCollapsed] = useState(false);
+
+  // Fetch announcements when component mounts
+  useEffect(() => {
+    if (currentUser) {
+      fetchAnnouncements();
+    }
+  }, [currentUser]);
+
+  const fetchAnnouncements = async () => {
+    try {
+      const response = await fetch('http://nipunup.com/php/get_announcement.php');
+      const data = await response.json();
+      setGymAnnouncements(data.announcements || []);
+    } catch (err) {
+      console.error('Error fetching announcements:', err);
+      showNotification('Server error while fetching announcements.', 'error');
+    }
+  };
 
   // Dark Mode Effect
   useEffect(() => {
@@ -407,23 +422,47 @@ const App = () => {
 
   const addClient = async (client) => {
     try {
+      // Ensure feeStatus is a string and has a valid value
+      const clientData = {
+        ...client,
+        feeStatus: String(client.feeStatus || 'Pending'), // Force string conversion
+        feeAmount: parseFloat(client.feeAmount) || 0,
+        // Ensure all other fields are properly formatted
+        name: String(client.name || ''),
+        email: String(client.email || ''),
+        phone: String(client.phone || ''),
+        membershipType: String(client.membershipType || 'Basic Monthly'),
+        paymentCycle: String(client.paymentCycle || 'Monthly'),
+        joinDate: client.joinDate || new Date().toISOString().split('T')[0],
+        lastPaymentDate: client.lastPaymentDate || '',
+        nextDueDate: client.nextDueDate || new Date().toISOString().split('T')[0]
+      };
+
+      console.log('Sending client data:', clientData); // Debug log
+
       const response = await fetch('http://nipunup.com/php/add_client.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(client),
+        body: JSON.stringify(clientData),
       });
       const data = await response.json();
+      console.log('Server response:', data); // Debug log
+
       if (data.success) {
         // Refetch clients after adding
         fetch('http://nipunup.com/php/get_clients.php')
           .then(res => res.json())
-          .then(data => setClientsData(data.clients));
+          .then(data => {
+            console.log('Fetched clients:', data.clients); // Debug log
+            setClientsData(data.clients);
+          });
         setShowAddClientModal(false);
         showNotification('Client added successfully!', 'success');
       } else {
-        showNotification('Failed to add client.', 'error');
+        showNotification(data.error || 'Failed to add client.', 'error');
       }
     } catch (err) {
+      console.error('Error adding client:', err);
       showNotification('Server error.', 'error');
     }
   };
@@ -483,9 +522,52 @@ const App = () => {
     setShowAddClientModal(true);
   };
 
-  const sendFeeReminder = (client) => {
-    console.log(`Reminder sent to ${client.name} (${client.email})`);
-    showNotification(`Fee reminder simulated for ${client.name}.`, 'info');
+  const sendFeeReminder = async (client) => {
+    try {
+      // Prepare the message content
+      const message = `Dear ${client.name},\n\nThis is a friendly reminder that your membership fee of $${client.feeAmount} is due on ${new Date(client.nextDueDate).toLocaleDateString()}. Please make the payment to continue enjoying our services.\n\nBest regards,\nFitness Freak Team`;
+
+      console.log('Attempting to send email to:', client.email);
+      // Send email
+      const emailResponse = await fetch('http://nipunup.com/php/send_email.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to: client.email,
+          subject: 'Fitness Freak - Membership Fee Reminder',
+          message: message
+        })
+      });
+      const emailData = await emailResponse.json();
+      console.log('Email response:', emailData);
+
+      console.log('Attempting to send SMS to:', client.phone);
+      // Send SMS
+      const smsResponse = await fetch('http://nipunup.com/php/send_sms.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to: client.phone,
+          message: message
+        })
+      });
+      const smsData = await smsResponse.json();
+      console.log('SMS response:', smsData);
+
+      // Check if both notifications were sent successfully
+      if (emailData.success && smsData.success) {
+        showNotification(`Reminder sent successfully to ${client.name} via email and SMS.`, 'success');
+      } else if (emailData.success) {
+        showNotification(`Email reminder sent to ${client.name}. SMS failed: ${smsData.error || 'Unknown error'}`, 'info');
+      } else if (smsData.success) {
+        showNotification(`SMS reminder sent to ${client.name}. Email failed: ${emailData.error || 'Unknown error'}`, 'info');
+      } else {
+        showNotification(`Failed to send reminders to ${client.name}. Email error: ${emailData.error || 'Unknown error'}. SMS error: ${smsData.error || 'Unknown error'}`, 'error');
+      }
+    } catch (error) {
+      console.error('Error sending reminders:', error);
+      showNotification(`Failed to send reminders. Error: ${error.message}`, 'error');
+    }
   };
 
   const markAsPaid = (clientId) => {
@@ -495,10 +577,38 @@ const App = () => {
     showNotification('Fee status updated to Paid.', 'success');
   };
 
-  const addAnnouncement = (announcement) => {
-    const newAnnouncement = { ...announcement, id: gymAnnouncements.length > 0 ? Math.max(...gymAnnouncements.map(a => a.id)) + 1 : 1, date: new Date().toISOString().split('T')[0] };
-    setGymAnnouncements([newAnnouncement, ...gymAnnouncements]);
-    showNotification('Announcement posted successfully!', 'success');
+  const addAnnouncement = async (announcement) => {
+    try {
+      const response = await fetch('http://nipunup.com/php/add_announcement.php', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          title: announcement.title,
+          content: announcement.content,
+          date: new Date().toISOString().split('T')[0]
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: 'Failed to parse error response' }));
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      if (data.success) {
+        // Refresh announcements after adding new one
+        fetchAnnouncements();
+        showNotification('Announcement posted successfully!', 'success');
+      } else {
+        showNotification(data.error || 'Failed to post announcement.', 'error');
+      }
+    } catch (err) {
+      console.error('Error posting announcement:', err);
+      showNotification(`Server error while posting announcement: ${err.message}`, 'error');
+    }
   };
   
   const MainContent = () => {
@@ -512,7 +622,9 @@ const App = () => {
         case 'Notifications': return <NotificationsView announcements={gymAnnouncements} onAddAnnouncement={addAnnouncement} />;
         case 'Gallery': return <GalleryView images={galleryImages} />;
         case 'BrandIcon': return <BrandIconView />;
-        case 'Settings': return <SettingsView userRole="admin" />;
+        case 'About Us': return <AboutUsView />;
+        case 'Contact': return <ContactView />;
+        case 'Settings': return <SettingsView userRole="admin" currentUser={currentUser} showNotification={showNotification} />;
         default: setCurrentView('Dashboard'); return <DashboardView clients={clientsData} announcements={gymAnnouncements} />;
       }
     } else if (currentUser.role === 'client') {
@@ -520,7 +632,9 @@ const App = () => {
         case 'My Profile': return <ClientProfileView client={currentUser} allClientsData={clientsData} />;
         case 'Announcements': return <NotificationsView announcements={gymAnnouncements} onAddAnnouncement={null} />;
         case 'Gallery': return <GalleryView images={galleryImages} />;
-        case 'Settings': return <SettingsView userRole="client" />;
+        case 'About Us': return <AboutUsView />;
+        case 'Contact': return <ContactView />;
+        case 'Settings': return <SettingsView userRole="client" currentUser={currentUser} showNotification={showNotification} />;
         default: setCurrentView('My Profile'); return <ClientProfileView client={currentUser} allClientsData={clientsData} />;
       }
     }
@@ -743,15 +857,51 @@ const ClientsView = ({ clients, onAddClient, onEditClient, onDeleteClient, searc
 };
 
 const ClientFormModal = ({ onClose, onSave, client, showNotification }) => {
-  const defaultNextDueDate = () => { const today = new Date(); today.setMonth(today.getMonth() + 1); return today.toISOString().split('T')[0]; };
-  const [formData, setFormData] = useState(client || { name: '', email: '', phone: '', membershipType: 'Basic Monthly', joinDate: new Date().toISOString().split('T')[0], feeAmount: 100, paymentCycle: 'Monthly', feeStatus: 'Pending', lastPaymentDate: '', nextDueDate: defaultNextDueDate() });
+  const defaultNextDueDate = () => {
+    const today = new Date();
+    today.setMonth(today.getMonth() + 1);
+    return today.toISOString().split('T')[0];
+  };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    try {
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) return '';
+      return date.toISOString().split('T')[0];
+    } catch (e) {
+      return '';
+    }
+  };
+
+  const [formData, setFormData] = useState(client ? {
+    ...client,
+    joinDate: formatDate(client.joinDate),
+    lastPaymentDate: formatDate(client.lastPaymentDate),
+    nextDueDate: formatDate(client.nextDueDate) || defaultNextDueDate(),
+    feeStatus: client.feeStatus || 'Pending'
+  } : {
+    name: '',
+    email: '',
+    phone: '',
+    membershipType: 'Basic Monthly',
+    joinDate: new Date().toISOString().split('T')[0],
+    feeAmount: 100,
+    paymentCycle: 'Monthly',
+    feeStatus: 'Pending',
+    lastPaymentDate: '',
+    nextDueDate: defaultNextDueDate()
+  });
+
   const [formErrors, setFormErrors] = useState({});
 
   const validateForm = () => {
     const errors = {};
     if (!formData.name.trim()) errors.name = "Name is required.";
-    if (!formData.email.trim()) errors.email = "Email is required."; else if (!/\S+@\S+\.\S+/.test(formData.email)) errors.email = "Email is invalid.";
-    if (!formData.phone.trim()) errors.phone = "Phone number is required."; else if (!/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/.test(formData.phone)) errors.phone = "Phone number is invalid (e.g., 123-456-7890).";
+    if (!formData.email.trim()) errors.email = "Email is required."; 
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) errors.email = "Email is invalid.";
+    if (!formData.phone.trim()) errors.phone = "Phone number is required."; 
+    else if (!/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/.test(formData.phone)) errors.phone = "Phone number is invalid (e.g., 123-456-7890).";
     if (!formData.joinDate) errors.joinDate = "Join date is required.";
     if (formData.feeAmount === '' || parseFloat(formData.feeAmount) < 0) errors.feeAmount = "Fee amount must be a non-negative number.";
     if (!formData.nextDueDate) errors.nextDueDate = "Next due date is required.";
@@ -759,17 +909,44 @@ const ClientFormModal = ({ onClose, onSave, client, showNotification }) => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleChange = (e) => { const { name, value } = e.target; setFormData(prev => ({ ...prev, [name]: value })); if (formErrors[name]) setFormErrors(prev => ({...prev, [name]: null})); };
-  const handleSubmit = (e) => { e.preventDefault(); if (validateForm()) onSave(formData); else showNotification("Please correct the errors in the form.", "error"); };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    let processedValue = value;
+
+    // Handle date fields
+    if (name === 'joinDate' || name === 'lastPaymentDate' || name === 'nextDueDate') {
+      processedValue = formatDate(value);
+    }
+
+    setFormData(prev => ({ ...prev, [name]: processedValue }));
+    if (formErrors[name]) setFormErrors(prev => ({...prev, [name]: null}));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      // Ensure all date fields are properly formatted before saving
+      const processedData = {
+        ...formData,
+        joinDate: formatDate(formData.joinDate),
+        lastPaymentDate: formatDate(formData.lastPaymentDate),
+        nextDueDate: formatDate(formData.nextDueDate),
+        feeStatus: formData.feeStatus || 'Pending' // Ensure feeStatus is always set
+      };
+      onSave(processedData);
+    } else {
+      showNotification("Please correct the errors in the form.", "error");
+    }
+  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
       <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white">{client ? 'Edit Client' : 'Add New Client'}</h2>
-            <button onClick={onClose} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500 rounded-sm p-1">
-                <X size={24} />
-            </button>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-white">{client ? 'Edit Client' : 'Add New Client'}</h2>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none focus:ring-1 focus:ring-indigo-500 rounded-sm p-1">
+            <X size={24} />
+          </button>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div><label htmlFor="clientform-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Full Name</label><input type="text" name="name" id="clientform-name" value={formData.name} onChange={handleChange} className={`mt-1 block w-full input-style ${formErrors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`} />{formErrors.name && <p className="text-xs text-red-500 mt-1">{formErrors.name}</p>}</div>
@@ -777,20 +954,103 @@ const ClientFormModal = ({ onClose, onSave, client, showNotification }) => {
           <div><label htmlFor="clientform-phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone Number</label><input type="tel" name="phone" id="clientform-phone" value={formData.phone} onChange={handleChange} className={`mt-1 block w-full input-style ${formErrors.phone ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`} />{formErrors.phone && <p className="text-xs text-red-500 mt-1">{formErrors.phone}</p>}</div>
           <div><label htmlFor="clientform-membershipType" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Membership Type</label><select name="membershipType" id="clientform-membershipType" value={formData.membershipType} onChange={handleChange} className="mt-1 block w-full input-style border-gray-300 dark:border-gray-600"><option>Basic Monthly</option><option>Premium Monthly</option><option>Student Monthly</option><option>Premium Annual</option></select></div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div><label htmlFor="clientform-joinDate" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Join Date</label><input type="date" name="joinDate" id="clientform-joinDate" value={formData.joinDate} onChange={handleChange} className={`mt-1 block w-full input-style ${formErrors.joinDate ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`} />{formErrors.joinDate && <p className="text-xs text-red-500 mt-1">{formErrors.joinDate}</p>}</div>
-            <div><label htmlFor="clientform-feeAmount" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Fee Amount ($)</label><input type="number" name="feeAmount" id="clientform-feeAmount" value={formData.feeAmount} onChange={handleChange} min="0" step="0.01" className={`mt-1 block w-full input-style ${formErrors.feeAmount ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`} />{formErrors.feeAmount && <p className="text-xs text-red-500 mt-1">{formErrors.feeAmount}</p>}</div>
+            <div>
+              <label htmlFor="clientform-joinDate" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Join Date</label>
+              <input
+                type="date"
+                name="joinDate"
+                id="clientform-joinDate"
+                value={formData.joinDate || ''}
+                onChange={handleChange}
+                className={`mt-1 block w-full input-style ${formErrors.joinDate ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`}
+              />
+              {formErrors.joinDate && <p className="text-xs text-red-500 mt-1">{formErrors.joinDate}</p>}
+            </div>
+            <div>
+              <label htmlFor="clientform-feeAmount" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Fee Amount ($)</label>
+              <input
+                type="number"
+                name="feeAmount"
+                id="clientform-feeAmount"
+                value={formData.feeAmount}
+                onChange={handleChange}
+                min="0"
+                step="0.01"
+                className={`mt-1 block w-full input-style ${formErrors.feeAmount ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`}
+              />
+              {formErrors.feeAmount && <p className="text-xs text-red-500 mt-1">{formErrors.feeAmount}</p>}
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div><label htmlFor="clientform-paymentCycle" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Payment Cycle</label><select name="paymentCycle" id="clientform-paymentCycle" value={formData.paymentCycle} onChange={handleChange} className="mt-1 block w-full input-style border-gray-300 dark:border-gray-600"><option>Monthly</option><option>Quarterly</option><option>Annually</option></select></div>
-            <div><label htmlFor="clientform-feeStatus" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Fee Status</label><select name="feeStatus" id="clientform-feeStatus" value={formData.feeStatus} onChange={handleChange} className="mt-1 block w-full input-style border-gray-300 dark:border-gray-600"><option>Pending</option><option>Paid</option><option>Overdue</option><option>Cancelled</option></select></div>
+            <div>
+              <label htmlFor="clientform-paymentCycle" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Payment Cycle</label>
+              <select
+                name="paymentCycle"
+                id="clientform-paymentCycle"
+                value={formData.paymentCycle}
+                onChange={handleChange}
+                className="mt-1 block w-full input-style border-gray-300 dark:border-gray-600"
+              >
+                <option>Monthly</option>
+                <option>Quarterly</option>
+                <option>Annually</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="clientform-feeStatus" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Fee Status</label>
+              <select
+                name="feeStatus"
+                id="clientform-feeStatus"
+                value={formData.feeStatus}
+                onChange={handleChange}
+                className="mt-1 block w-full input-style border-gray-300 dark:border-gray-600"
+              >
+                <option>Pending</option>
+                <option>Paid</option>
+                <option>Overdue</option>
+                <option>Cancelled</option>
+              </select>
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div><label htmlFor="clientform-lastPaymentDate" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Last Payment Date</label><input type="date" name="lastPaymentDate" id="clientform-lastPaymentDate" value={formData.lastPaymentDate} onChange={handleChange} className="mt-1 block w-full input-style border-gray-300 dark:border-gray-600" /></div>
-            <div><label htmlFor="clientform-nextDueDate" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Next Due Date</label><input type="date" name="nextDueDate" id="clientform-nextDueDate" value={formData.nextDueDate} onChange={handleChange} className={`mt-1 block w-full input-style ${formErrors.nextDueDate ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`} />{formErrors.nextDueDate && <p className="text-xs text-red-500 mt-1">{formErrors.nextDueDate}</p>}</div>
+            <div>
+              <label htmlFor="clientform-lastPaymentDate" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Last Payment Date</label>
+              <input
+                type="date"
+                name="lastPaymentDate"
+                id="clientform-lastPaymentDate"
+                value={formData.lastPaymentDate || ''}
+                onChange={handleChange}
+                className="mt-1 block w-full input-style border-gray-300 dark:border-gray-600"
+              />
+            </div>
+            <div>
+              <label htmlFor="clientform-nextDueDate" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Next Due Date</label>
+              <input
+                type="date"
+                name="nextDueDate"
+                id="clientform-nextDueDate"
+                value={formData.nextDueDate || ''}
+                onChange={handleChange}
+                className={`mt-1 block w-full input-style ${formErrors.nextDueDate ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`}
+              />
+              {formErrors.nextDueDate && <p className="text-xs text-red-500 mt-1">{formErrors.nextDueDate}</p>}
+            </div>
           </div>
           <div className="flex justify-end space-x-3 pt-4">
-            <button type="button" onClick={onClose} className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">Cancel</button>
-            <button type="submit" className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">{client ? 'Update Client' : 'Save Client'}</button>
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+            >
+              {client ? 'Update Client' : 'Save Client'}
+            </button>
           </div>
         </form>
       </div>
@@ -883,7 +1143,194 @@ const BrandIconView = () => {
   );
 };
 
-const SettingsView = ({ userRole }) => {
+const AboutUsView = () => {
+  return (
+    <div className="space-y-6">
+      <h1 className="text-3xl font-bold text-gray-800 dark:text-white">About Us</h1>
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg space-y-6">
+        <div className="flex items-center space-x-4 mb-6">
+          <img src="/img/symbol.jpeg" alt="Fitness Freak Logo" className="w-20 h-20 rounded-xl object-cover" />
+          <div>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Fitness Freak</h2>
+            <p className="text-gray-600 dark:text-gray-400">Founded by Amit Yadav</p>
+          </div>
+        </div>
+        
+        <div className="prose dark:prose-invert max-w-none">
+          <p className="text-gray-700 dark:text-gray-300">
+            Fitness Freak is a fitness-focused app founded by Amit Yadav, a passionate gym owner with years of experience helping people transform their bodies and lifestyles. This app was created to extend his expertise beyond the gym walls, providing users with a powerful digital platform for personalized fitness.
+          </p>
+          
+          <p className="text-gray-700 dark:text-gray-300">
+            The app focuses on strength training, fat loss, nutrition guidance, and overall health improvement. Whether you're just starting your fitness journey or you're an advanced lifter, Fitness Freak offers expert-designed workout routines, meal plans, and real-time progress tracking to help you stay consistent and reach your goals.
+          </p>
+          
+          <p className="text-gray-700 dark:text-gray-300">
+            Amit believes in discipline, education, and community. With Fitness Freak, he aims to create a space where everyone—from beginners to fitness pros—feels supported, motivated, and equipped to succeed. Join the Fitness Freak community and unlock your full potential.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ContactView = () => {
+  return (
+    <div className="space-y-6">
+      <h1 className="text-3xl font-bold text-gray-800 dark:text-white">Contact Us</h1>
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg space-y-6">
+        <div className="prose dark:prose-invert max-w-none">
+          <p className="text-gray-700 dark:text-gray-300">
+            We're here to support you every step of the way on your fitness journey. If you have questions, suggestions, or need help using the app, feel free to get in touch:
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <div className="flex items-start space-x-3">
+              <div className="p-2 bg-indigo-100 dark:bg-indigo-900 rounded-lg">
+                <svg className="w-6 h-6 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Address</h3>
+                <p className="text-gray-600 dark:text-gray-400">Baba Complex, Vikash Nagar, Rajgarh, Jhansi, India, 284135</p>
+              </div>
+            </div>
+
+            <div className="flex items-start space-x-3">
+              <div className="p-2 bg-indigo-100 dark:bg-indigo-900 rounded-lg">
+                <svg className="w-6 h-6 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Phone</h3>
+                <p className="text-gray-600 dark:text-gray-400">+91 99351 08666</p>
+              </div>
+            </div>
+
+            <div className="flex items-start space-x-3">
+              <div className="p-2 bg-indigo-100 dark:bg-indigo-900 rounded-lg">
+                <svg className="w-6 h-6 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Email</h3>
+                <p className="text-gray-600 dark:text-gray-400">ypriya858@gmail.com</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-gray-50 dark:bg-gray-900 rounded-xl p-6">
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Follow Us</h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
+              Stay connected with us on social media for the latest updates, tips, and community stories.
+            </p>
+            <div className="flex space-x-4">
+              <button className="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </button>
+              <button className="p-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                </svg>
+              </button>
+              <button className="p-2 bg-blue-400 text-white rounded-lg hover:bg-blue-500 transition-colors">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const SettingsView = ({ userRole, currentUser, showNotification }) => {
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handlePasswordChange = async (e) => {
+    e.preventDefault();
+    setPasswordError('');
+
+    // Validate passwords
+    if (newPassword.length < 6) {
+      setPasswordError('New password must be at least 6 characters long');
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setPasswordError('New passwords do not match');
+      return;
+    }
+
+    try {
+      // Log the request data (excluding passwords for security)
+      console.log('Password update request data:', {
+        email: currentUser.email,
+        userId: currentUser.id,
+        role: userRole,
+        currentPasswordLength: currentPassword.length,
+        newPasswordLength: newPassword.length
+      });
+
+      const response = await fetch('http://nipunup.com/php/update_password.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          currentPassword,
+          newPassword,
+          userRole,
+          email: currentUser.email,
+          userId: currentUser.id
+        })
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Server response not OK:', {
+          status: response.status,
+          statusText: response.statusText,
+          errorText
+        });
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('Password update response:', data);
+
+      if (data.success) {
+        showNotification('Password updated successfully!', 'success');
+        setShowPasswordForm(false);
+        setCurrentPassword('');
+        setNewPassword('');
+        setConfirmPassword('');
+      } else {
+        setPasswordError(data.error || 'Failed to update password');
+        console.error('Password update failed:', data);
+      }
+    } catch (err) {
+      console.error('Error updating password:', err);
+      setPasswordError(err.message || 'Server error while updating password');
+    }
+  };
+
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold text-gray-800 dark:text-white">Settings</h1>
@@ -891,7 +1338,91 @@ const SettingsView = ({ userRole }) => {
         <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-4">Account Information</h2>
         <div className="space-y-3">
           <p className="text-gray-600 dark:text-gray-400"><strong>Role:</strong> <span className="capitalize">{userRole}</span></p>
-          <button className="mt-2 px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">Change Password (Simulated)</button>
+          <button 
+            onClick={() => setShowPasswordForm(!showPasswordForm)}
+            className="mt-2 px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+          >
+            {showPasswordForm ? 'Cancel Password Change' : 'Change Password'}
+          </button>
+
+          {showPasswordForm && (
+            <form onSubmit={handlePasswordChange} className="mt-4 space-y-4">
+              {passwordError && (
+                <p className="text-sm text-red-500 bg-red-100 dark:bg-red-900 dark:text-red-100 p-3 rounded-md">
+                  {passwordError}
+                </p>
+              )}
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Current Password</label>
+                <div className="relative mt-1">
+                  <input
+                    type={showCurrentPassword ? "text" : "password"}
+                    value={currentPassword}
+                    onChange={(e) => setCurrentPassword(e.target.value)}
+                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 dark:text-gray-400"
+                  >
+                    {showCurrentPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">New Password</label>
+                <div className="relative mt-1">
+                  <input
+                    type={showNewPassword ? "text" : "password"}
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowNewPassword(!showNewPassword)}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 dark:text-gray-400"
+                  >
+                    {showNewPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Confirm New Password</label>
+                <div className="relative mt-1">
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 dark:text-gray-400"
+                  >
+                    {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex justify-end">
+                <button
+                  type="submit"
+                  className="px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 dark:focus:ring-offset-gray-800"
+                >
+                  Update Password
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </div>
       {userRole === 'admin' && (
@@ -903,11 +1434,11 @@ const SettingsView = ({ userRole }) => {
           </div>
         </div>
       )}
-       <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
         <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-4">Application Preferences</h2>
         <div className="space-y-3">
-            <p className="text-gray-600 dark:text-gray-400">Dark Mode toggle is available in the sidebar.</p>
-            <p className="text-gray-600 dark:text-gray-400">Notification preferences could be configured here.</p>
+          <p className="text-gray-600 dark:text-gray-400">Dark Mode toggle is available in the sidebar.</p>
+          <p className="text-gray-600 dark:text-gray-400">Notification preferences could be configured here.</p>
         </div>
       </div>
     </div>
