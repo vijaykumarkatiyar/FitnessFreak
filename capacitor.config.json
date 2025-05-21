@@ -1,6 +1,6 @@
 {
-  "appId": "com.yourname.myapp",
-  "appName": "My App",
-  "webDir": "build",
+  "appId": "com.fitnessfreak.com",
+  "appName": "fitness freak",
+  "webDir": "dist",
   "bundledWebRuntime": false
 }

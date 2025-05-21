@@ -29,9 +29,9 @@ const LoginView = ({ onLogin, authError }) => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 p-4">
-      <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-2xl w-full max-w-md">
+      <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm p-8 rounded-xl shadow-2xl w-full max-w-md">
         <div className="text-center mb-8">
-          <img src="/img/symbol.jpeg" alt="Fitness Freak Logo" className="mx-auto" style={{ width: 48, height: 48, borderRadius: '12px', objectFit: 'cover' }} />
+          <img src="/img/symbol.jpeg" alt="Fitness Freak Logo" className="mx-auto bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm" style={{ width: 48, height: 48, borderRadius: '12px', objectFit: 'cover' }} />
           <h1 className="text-3xl font-bold text-gray-800 dark:text-white mt-2">Fitness Freak</h1>
           <p className="text-gray-600 dark:text-gray-400">Welcome Back! Please login.</p>
         </div>
@@ -40,12 +40,12 @@ const LoginView = ({ onLogin, authError }) => {
             <label htmlFor="email-login" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email Address</label>
             <input
               type="email"
-              id="email-login" // Unique ID for login form
+              id="email-login"
               name="email-login"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="mt-1 block w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white"
+              className="mt-1 block w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 focus:border-indigo-500 sm:text-sm bg-white/90 dark:bg-gray-700/90 backdrop-blur-sm dark:text-white"
               placeholder="you@example.com"
             />
           </div>
@@ -54,12 +54,12 @@ const LoginView = ({ onLogin, authError }) => {
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
-                id="password-login" // Unique ID for login form
+                id="password-login"
                 name="password-login"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="mt-1 block w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white"
+                className="mt-1 block w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 focus:border-indigo-500 sm:text-sm bg-white/90 dark:bg-gray-700/90 backdrop-blur-sm dark:text-white"
                 placeholder="••••••••"
               />
               <button
@@ -72,11 +72,11 @@ const LoginView = ({ onLogin, authError }) => {
               </button>
             </div>
           </div>
-          {authError && <p className="text-sm text-red-600 dark:text-red-400 bg-red-100 dark:bg-red-900 p-3 rounded-md text-center">{authError}</p>}
+          {authError && <p className="text-sm text-red-600 dark:text-red-400 bg-red-100/90 dark:bg-red-900/90 backdrop-blur-sm p-3 rounded-md text-center">{authError}</p>}
           <div>
             <button
               type="submit"
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out"
+              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600/90 hover:bg-indigo-700/90 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out"
             >
               Login
             </button>
@@ -98,7 +98,7 @@ const Header = ({ currentUser, toggleMobileSidebar, currentView, isDesktopSideba
   const mobileSidebarOpen = currentUser ? currentUser.isMobileSidebarOpen : false;
 
   return (
-    <header className="bg-white dark:bg-gray-800 shadow-md h-16 flex items-center justify-between px-4 sm:px-6 sticky top-0 z-30">
+    <header className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm shadow-md h-16 flex items-center justify-between px-4 sm:px-6 sticky top-0 z-30">
       <div className="flex items-center">
         <button
           onClick={() => {
@@ -125,7 +125,7 @@ const Header = ({ currentUser, toggleMobileSidebar, currentView, isDesktopSideba
         </span>
         <button
             onClick={onLogout}
-            className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-red-100 dark:hover:bg-red-700 hover:text-red-600 dark:hover:text-red-200 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-red-100/90 dark:hover:bg-red-700/90 backdrop-blur-sm hover:text-red-600 dark:hover:text-red-200 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
             aria-label="Logout"
         >
           <LogOut size={22} />
@@ -163,14 +163,14 @@ const Sidebar = ({ isMobileSidebarOpen, isDesktopSidebarCollapsed, currentView, 
 
   return (
     <aside
-      className={`fixed inset-y-0 left-0 z-40 bg-gray-800 dark:bg-gray-900 text-white shadow-lg
+      className={`fixed inset-y-0 left-0 z-40 bg-gray-800/90 dark:bg-gray-900/90 backdrop-blur-sm text-white shadow-lg
                  transform transition-all duration-300 ease-in-out flex flex-col
                  ${isMobileSidebarOpen ? 'translate-x-0 w-64' : '-translate-x-full w-64'} 
                  lg:translate-x-0 lg:static 
                  ${isDesktopSidebarCollapsed ? 'lg:w-20' : 'lg:w-64'}`}
     >
-      <div className={`flex items-center justify-center h-16 border-b border-gray-700 dark:border-gray-750 transition-all duration-300 ${showText ? 'px-4' : 'lg:px-2'}`}>
-        <img src="/img/symbol.jpeg" alt="Fitness Freak Logo" className={`transition-all duration-200 ${showText ? 'mr-2' : 'lg:mx-auto'} bg-white dark:bg-gray-900`} style={{ width: showText ? 32 : 28, height: showText ? 32 : 28, borderRadius: '8px', objectFit: 'cover' }} />
+      <div className={`flex items-center justify-center h-16 border-b border-gray-700/50 dark:border-gray-750/50 transition-all duration-300 ${showText ? 'px-4' : 'lg:px-2'}`}>
+        <img src="/img/symbol.jpeg" alt="Fitness Freak Logo" className={`transition-all duration-200 ${showText ? 'mr-2' : 'lg:mx-auto'} bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm`} style={{ width: showText ? 32 : 28, height: showText ? 32 : 28, borderRadius: '8px', objectFit: 'cover' }} />
         <h1 className={`font-bold text-red-400 dark:text-red-500 transition-opacity duration-200 hover:text-red-500 dark:hover:text-red-400 ${showText ? 'text-2xl opacity-100' : 'lg:opacity-0 lg:text-[0px] lg:hidden'}`}>
           Fitness Freak
         </h1>
@@ -185,7 +185,7 @@ const Sidebar = ({ isMobileSidebarOpen, isDesktopSidebarCollapsed, currentView, 
                 <button
                   onClick={() => setCurrentView('Gallery')}
                   className={`w-full flex items-center py-3 rounded-lg text-left transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-red-400 dark:focus:ring-red-400 focus:ring-offset-1 focus:ring-offset-gray-800
-                    ${currentView === 'Gallery' || currentView === 'BrandIcon' ? 'bg-red-600 dark:bg-red-700 text-white shadow-md' : 'hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-red-500 dark:hover:text-red-400'}
+                    ${currentView === 'Gallery' || currentView === 'BrandIcon' ? 'bg-red-600/90 dark:bg-red-700/90 backdrop-blur-sm text-white shadow-md' : 'hover:bg-gray-700/90 dark:hover:bg-gray-800/90 backdrop-blur-sm hover:text-red-500 dark:hover:text-red-400'}
                     ${showText ? 'px-4 space-x-3' : 'lg:px-0 lg:justify-center lg:py-3'}`}
                   title="Gallery"
                 >
@@ -198,38 +198,32 @@ const Sidebar = ({ isMobileSidebarOpen, isDesktopSidebarCollapsed, currentView, 
                   <div className="ml-8 space-y-1">
                     <button
                       onClick={() => setCurrentView('Gallery')}
-                      className={`w-full flex items-center py-2 rounded-lg text-left text-sm transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-red-400 dark:focus:ring-red-400 focus:ring-offset-1 focus:ring-offset-gray-800
-                        ${currentView === 'Gallery' ? 'bg-red-500 dark:bg-red-600 text-white' : 'hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-red-500 dark:hover:text-red-400'}
-                        px-2`}
-                      title="Gallery"
+                      className={`w-full flex items-center py-2 px-4 rounded-lg text-left transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-red-400 dark:focus:ring-red-400 focus:ring-offset-1 focus:ring-offset-gray-800
+                        ${currentView === 'Gallery' ? 'bg-red-600/90 dark:bg-red-700/90 backdrop-blur-sm text-white shadow-md' : 'hover:bg-gray-700/90 dark:hover:bg-gray-800/90 backdrop-blur-sm hover:text-red-500 dark:hover:text-red-400'}`}
                     >
-                      <ImageIcon size={18} className="mr-2" />Gallery
+                      <ImageIcon size={20} className="mr-3" />
+                      <span>Gallery Images</span>
                     </button>
                     <button
                       onClick={() => setCurrentView('BrandIcon')}
-                      className={`w-full flex items-center py-2 rounded-lg text-left text-sm transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-red-400 dark:focus:ring-red-400 focus:ring-offset-1 focus:ring-offset-gray-800
-                        ${currentView === 'BrandIcon' ? 'bg-red-500 dark:bg-red-600 text-white' : 'hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-red-500 dark:hover:text-red-400'}
-                        px-2`}
-                      title="BrandIcon"
+                      className={`w-full flex items-center py-2 px-4 rounded-lg text-left transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-red-400 dark:focus:ring-red-400 focus:ring-offset-1 focus:ring-offset-gray-800
+                        ${currentView === 'BrandIcon' ? 'bg-red-600/90 dark:bg-red-700/90 backdrop-blur-sm text-white shadow-md' : 'hover:bg-gray-700/90 dark:hover:bg-gray-800/90 backdrop-blur-sm hover:text-red-500 dark:hover:text-red-400'}`}
                     >
-                      <ImageIcon size={18} className="mr-2" />BrandIcon
+                      <ImageIcon size={20} className="mr-3" />
+                      <span>Brand Icon</span>
                     </button>
                   </div>
                 )}
               </div>
             );
           }
-          // Default nav item
           return (
             <button
               key={view}
-              onClick={() => {
-                setCurrentView(view);
-                if (isMobileSidebarOpen) closeMobileSidebar();
-              }}
+              onClick={() => setCurrentView(view)}
               className={`w-full flex items-center py-3 rounded-lg text-left transition-all duration-200 ease-in-out group focus:outline-none focus:ring-2 focus:ring-red-400 dark:focus:ring-red-400 focus:ring-offset-1 focus:ring-offset-gray-800
-                        ${currentView === view ? 'bg-red-600 dark:bg-red-700 text-white shadow-md' : 'hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-red-500 dark:hover:text-red-400'}
-                        ${showText ? 'px-4 space-x-3' : 'lg:px-0 lg:justify-center lg:py-3'}`}
+                ${currentView === view ? 'bg-red-600/90 dark:bg-red-700/90 backdrop-blur-sm text-white shadow-md' : 'hover:bg-gray-700/90 dark:hover:bg-gray-800/90 backdrop-blur-sm hover:text-red-500 dark:hover:text-red-400'}
+                ${showText ? 'px-4 space-x-3' : 'lg:px-0 lg:justify-center lg:py-3'}`}
               title={view}
             >
               {getIcon(view)}
@@ -711,14 +705,17 @@ const App = () => {
       <div className={`flex-1 flex flex-col overflow-hidden transition-all duration-300 ease-in-out ${isDesktopSidebarCollapsed ? 'lg:ml-0' : 'lg:ml-0'}`}>
         <Header
           currentUser={currentUser}
-          toggleMobileSidebar={toggleMobileSidebar} // Pass the correct function
+          toggleMobileSidebar={toggleMobileSidebar}
           currentView={currentView}
           isDesktopSidebarCollapsed={isDesktopSidebarCollapsed}
           toggleDesktopSidebarCollapse={toggleDesktopSidebarCollapse}
           onLogout={handleLogout}
         />
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
-          <MainContent />
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto relative">
+          <Watermark />
+          <div className="relative z-10">
+            <MainContent />
+          </div>
         </main>
       </div>
       
@@ -751,7 +748,7 @@ const ClientProfileView = ({ client, allClientsData }) => {
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold text-gray-800 dark:text-white">My Profile</h1>
-      <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-xl shadow-lg">
+      <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm p-6 sm:p-8 rounded-xl shadow-lg">
         <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
           <img 
             src={!imageError && currentClientData.avatar ? currentClientData.avatar : `https://placehold.co/150x150/CCCCCC/FFFFFF?text=${currentClientData.name.substring(0,2).toUpperCase()}`}
@@ -802,7 +799,7 @@ const DashboardView = ({ clients, announcements }) => {
         <StatCard title="Fees Pending" value={pendingFeesCount} icon={<DollarSign size={32}/>} color="red" />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+        <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm p-6 rounded-xl shadow-lg">
           <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-200 mb-4">Recent Announcements</h2>
           {announcements.length > 0 ? announcements.slice(0, 3).map(ann => (
             <div key={ann.id} className="mb-3 pb-3 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
@@ -812,7 +809,7 @@ const DashboardView = ({ clients, announcements }) => {
             </div>
           )) : <p className="text-gray-500 dark:text-gray-400">No recent announcements.</p>}
         </div>
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+        <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm p-6 rounded-xl shadow-lg">
           <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-200 mb-4">Upcoming Due Dates (Next 7 Days)</h2>
           {clients.filter(c => (c.feeStatus === 'Pending' || c.feeStatus === 'Overdue') && c.nextDueDate && new Date(c.nextDueDate) >= new Date() && new Date(c.nextDueDate) <= new Date(Date.now() + 7 * 24 * 60 * 60 * 1000))
             .sort((a,b) => new Date(a.nextDueDate) - new Date(b.nextDueDate))
@@ -833,14 +830,13 @@ const DashboardView = ({ clients, announcements }) => {
 
 const StatCard = ({ title, value, icon, color }) => {
   const colors = {
-    blue: { border: 'border-blue-500 dark:border-blue-400', bg: 'bg-blue-100 dark:bg-blue-800', text: 'text-blue-500 dark:text-blue-300' },
-    green: { border: 'border-green-500 dark:border-green-400', bg: 'bg-green-100 dark:bg-green-800', text: 'text-green-500 dark:text-green-300' },
-    red: { border: 'border-red-500 dark:border-red-400', bg: 'bg-red-100 dark:bg-red-800', text: 'text-red-500 dark:text-red-300' },
-    red: { border: 'border-red-500 dark:border-red-400', bg: 'bg-red-100 dark:bg-red-800', text: 'text-red-500 dark:text-red-300' }, // Changed from orange
+    blue: { border: 'border-blue-500 dark:border-blue-400', bg: 'bg-blue-100/90 dark:bg-blue-800/90', text: 'text-blue-500 dark:text-blue-300' },
+    green: { border: 'border-green-500 dark:border-green-400', bg: 'bg-green-100/90 dark:bg-green-800/90', text: 'text-green-500 dark:text-green-300' },
+    red: { border: 'border-red-500 dark:border-red-400', bg: 'bg-red-100/90 dark:bg-red-800/90', text: 'text-red-500 dark:text-red-300' },
   };
   const C = colors[color] || colors.blue;
   return (
-    <div className={`bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border-l-4 ${C.border}`}>
+    <div className={`bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border-l-4 ${C.border}`}>
       <div className="flex items-center justify-between">
         <div>
           <p className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">{title}</p>
@@ -869,15 +865,15 @@ const ClientsView = ({ clients, onAddClient, onEditClient, onDeleteClient, searc
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h1 className="text-3xl font-bold text-gray-800 dark:text-white">Manage Clients</h1>
-        <button onClick={onAddClient} className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md flex items-center transition duration-150 ease-in-out self-start sm:self-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+        <button onClick={onAddClient} className="bg-indigo-600/90 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md flex items-center transition duration-150 ease-in-out self-start sm:self-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
           <PlusCircle size={20} className="mr-2" /> Add New Client
         </button>
       </div>
       <div className="relative">
-        <input type="text" placeholder="Search clients (Name, Email, Phone)..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-full p-3 pl-10 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 focus:border-transparent outline-none dark:bg-gray-700 dark:text-white" />
+        <input type="text" placeholder="Search clients (Name, Email, Phone)..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-full p-3 pl-10 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 focus:border-transparent outline-none bg-white/90 dark:bg-gray-700/90 backdrop-blur-sm" />
         <Search size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" />
       </div>
-      <div className="bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden">
+      <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm shadow-xl rounded-lg overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[700px] table-auto text-left">
             <thead className="bg-gray-50 dark:bg-gray-700">
@@ -1192,7 +1188,7 @@ const FeesView = ({ clients, onSendReminder, onMarkAsPaid }) => {
     <div className="space-y-6">
       <h1 className="text-3xl font-bold text-gray-800 dark:text-white">Fee Management</h1>
       {pendingFeesClients.length > 0 ? (
-        <div className="bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden">
+        <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm shadow-xl rounded-lg overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[700px] table-auto">
               <thead className="bg-gray-50 dark:bg-gray-700">
@@ -1774,6 +1770,20 @@ const SettingsView = ({ userRole, currentUser, showNotification }) => {
           <p className="text-gray-600 dark:text-gray-400">Dark Mode toggle is available in the sidebar.</p>
           <p className="text-gray-600 dark:text-gray-400">Notification preferences could be configured here.</p>
         </div>
+      </div>
+    </div>
+  );
+};
+
+const Watermark = () => {
+  return (
+    <div className="fixed inset-0 pointer-events-none z-0">
+      <div className="absolute inset-0 flex items-start justify-center">
+        <img 
+          src="/img/malebody.jpeg" 
+          alt="Fitness Freak Watermark" 
+          className="w-full h-full object-cover object-top select-none opacity-[0.04] dark:opacity-[0.03] invert dark:invert-0"
+        />
       </div>
     </div>
   );
